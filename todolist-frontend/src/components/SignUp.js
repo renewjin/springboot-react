@@ -1,104 +1,136 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 
-const Signup = () => {
-    const [id, setId] = useState('');
-    const [pw, setPw] = useState('');
-    const [pwCheck, setPwCheck] = useState('');
-    const [name, setName] = useState('');
+/* 회원 가입 컴포넌트 */
+const SignupContainer = () => {
 
-    // 가입결과 메세지
-    const [resultMessage, setResultMessage] = useState('');
-    // 아이디중복결과
-    const [idValidation, setIdValidation] = useState(false);
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const [pwCheck, setPwCheck] = useState('');
+  const [name, setName] = useState('');
+  const [result, setResult] = useState('');
 
-    const 아이디중복검사 = (inputId) => {
-        setId(inputId);
+  // 아이디 중복 검사
+  const [idValidation, setIdValidation] = useState(false);
+  // false -> 사용 불가
+  // true -> 사용 가능
 
-        if(inputId.trim().length < 4) { // 아이디4글자이상
-            setIdValidation(false);
-            return;
-        }
 
-        // DB에 중복 아이디 검사
-        fetch("/idCheck?id=" + inputId)
-        .then(res => res.text())
-        .then(result => {
-            console.info(result);
-            if(Number(result) === 0) { // spring에서 중복이면 1, 중복되지 않으면 0값을 리턴
-                setIdValidation(true);
-            } else {
-                setIdValidation(false);
-            }
-        })
+  /* 아이디 중복 검사 이벤트 핸들러*/
+  const idCheck = (inputId) => {
+
+    // inputId : 현재 입력한 ID
+    setId(inputId);
+
+    // 4글자 미만이면 중복 검사 X
+    if(inputId.trim().length < 4){
+      setIdValidation(false); // 중복 검사 여부 상태 변수
+      return;
     }
 
-    const 회원가입버튼 = () => {
-        if (!idValidation) {
-            alert("아이디가 유효하지 않습니다");
-            return;
-        }
+    // 비동기로 아이디 중복 검사 수행
+    fetch("/idCheck?id=" + inputId)
+    .then(resp => resp.text())
+    .then(result => {
 
-        if (pw !== pwCheck) {
-            alert("비밀번호가 일치하지 않습니다");
-            return;
-        }
+      // 중복이 아닐 때 true, 중복이면 false
+      if(Number(result) === 0) setIdValidation(true);
+      else                     setIdValidation(false);
+    })
 
-        const input값들 = {};
-        input값들.id = id;
-        input값들.pw = pw;
-        input값들.name = name;
+  }
 
-        fetch("/signup", {
-            method : "POST",
-            headers : {"Content-Type" : "application/json"},
-            body : JSON.stringify(input값들)
-        })
-        .then(res => res.text())
-        .then(result => {
-            
-            console.log("bbbb" + result);
-            if(Number(result) > 0) { // 성공1 실패0
-                setResultMessage("회원가입 성공");
-                setId('');
-                setPw('')
-                setPwCheck('');
-            } else {
-                setResultMessage("회원가입 실패");
-            }
-        })
+  
+
+  /* 회원 가입 이벤트 핸들러*/
+  const signup = () => {
+
+    // 아이디 유효하지 않으면 가입 X
+    if(!idValidation){
+      alert('아이디가 유효하지 않습니다');
+      return;
     }
 
-    return (
-        <div className="signup-container">
-            <label> ID : 
-                <input type="text" 
-                    onChange={e => 아이디중복검사(e.target.value)}
-                    value={id}
-                    className={idValidation ? '' : 'id-err'}
-                />
-            </label>
-            <label> PW :
-                <input type="password"
-                        onChange={e=> {setPw(e.target.value)}}
-                        value={pw}
-                />
-            </label>
-            <label> PW CHECK :
-                <input type="password"
-                        onChange={e=> {setPwCheck(e.target.value)}}
-                        value={pwCheck}
-                />
-            </label>
-            <label> NAME :
-                <input type="text"
-                        onChange={e=> {setName(e.target.value)}}
-                        value={name}
-                />
-            </label>
-            <button onClick={회원가입버튼}>가입하기</button>
-            <hr/>
-            <h3>{resultMessage}</h3>
-        </div>
-    );
-};
-export default Signup;
+    // 비밀번호, 비밀번호 확인이 일치하지 않으면 가입 X
+    if(pw !== pwCheck){
+      alert('비밀번호가 일치하지 않습니다');
+      return;
+    }
+
+    /* 회원 가입 비동기 요청 */
+    const inputObj = {};
+    inputObj.id = id;
+    inputObj.pw = pw;
+    inputObj.name = name;
+
+    fetch("/signup", {
+      method : "POST",
+      headers : {"Content-Type" : "application/json"},
+      body : JSON.stringify(inputObj)
+    })
+    .then(resp => resp.text())
+    .then(result => {
+
+      if(Number(result) > 0){
+        setResult('회원 가입 성공');
+        setId('');
+        setPw('');
+        setPwCheck('');
+        setName('');
+      } 
+      else{
+        setResult('회원 가입 실패');
+      }
+
+
+    })
+
+
+  }
+
+
+
+  return (
+    <div className="signup-container">
+      <label>
+        ID :
+        <input type="text"
+          onChange={e => {idCheck(e.target.value) }}
+          value={id}
+          className={idValidation ? '' : 'id-error'}
+        />
+      </label>
+
+      <label>
+        PW :
+        <input type="password"
+          onChange={e => { setPw(e.target.value) }}
+          value={pw}
+        />
+      </label>
+
+      <label>
+        PW CHECK :
+        <input type="password"
+          onChange={e => { setPwCheck(e.target.value) }}
+          value={pwCheck}
+        />
+      </label>
+
+      <label>
+        NAME :
+        <input type="text"
+          onChange={e => { setName(e.target.value) }}
+          value={name}
+        />
+      </label>
+
+      <button onClick={signup}>가입하기</button>
+
+      <hr />
+
+      <h3>{result}</h3>
+    </div>
+  );
+}
+
+export default SignupContainer;
