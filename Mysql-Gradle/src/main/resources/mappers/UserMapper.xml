@@ -15,4 +15,14 @@
 	Insert into user(name, email)
 	values (#{name}, #{email})
 	</insert>
+	
+	<delete id="deleteUser" parameterType="int"> <!-- id값으로 삭제 -->
+	DELETE FROM USER WHERE ID = #{id}
+	</delete>
+	
+	<update id="updateUser" parameterType="User">
+		UPDATE user
+		SET name = #{name}, email = {email}
+		WHERE id = #{id}
+	</update>
 </mapper>
