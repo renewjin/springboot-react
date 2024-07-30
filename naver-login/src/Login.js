@@ -1,8 +1,27 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const Login = () => {
 
     const[userInfo, setUserInfo] = useState(null);
+
+    // useEffect를  활용해서 데이터 가져오기
+    // get 이용해서 특정 유저 정보를 가져오는 주소 설정
+    useEffect(()=> {
+        const 유저정보 = () => {
+            fetch('http://localhost:9010/userInfo') // HTTP METHOD (GET, POST, PUT, DELETE)
+            .then(가져온응답결과 => { // then fetch가 java controller에서 값을 가져왔을 떄 실행할 구문
+                return 가져온응답결과.json();
+            })
+            .then(data => { // 위 then 실행한 구문을 바탕으로 데이터 userInfo에 넣어주기
+                setUserInfo(data);
+            })
+            .catch(err => { // 위 두 then모두 문제가 생겻을 때 문제를 catch할 구문
+                console.error("Error user INFO : ", err);
+            })
+        }
+        // 유저정보 기능을 실행하는 구문과
+        유저정보();
+    }, []) // 최초실행인지 주기적으로 계속 실행하는 효과인지 설정
     return (
         <>
         {/* 만약에 userInfo 정보가 있으면 로그인 완료이고 userInfo 정보가 없으면 로그인 하기 화면 보여줌 */}
@@ -21,7 +40,7 @@ const Login = () => {
         ) : (
             /*  userInfo 정보가 없을 때 */
             <a href="http://localhost:9010/api/naverLogin">
-                <img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG" />
+                
                 네이버로 로그인하기
             </a>
         )}
