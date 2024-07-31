@@ -62,6 +62,7 @@ public class TodoController {
 	 */
 	@PostMapping("/todo")
 	public int insert(@RequestBody Todo todo) {
+		log.info("todo : " + todo);
 		return service.insert(todo);
 	}
 	

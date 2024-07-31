@@ -16,6 +16,6 @@ import lombok.ToString;
 public class Todo {
 	private int todoNo; // 할 일 번호
 	private String title; // 할 일의 제목이자 내용
-	private String isDone; // 할 일을 완료햇는지 완료 여부
+	private char isDone; // 할 일을 완료햇는지 완료 여부
 	private int todoMemberNo; // 어떤고객의 할 일인지 고객 번호 연동
 }

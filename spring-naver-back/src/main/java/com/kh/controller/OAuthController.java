@@ -25,7 +25,7 @@ import jakarta.servlet.http.HttpSession;
  * 
  * */
 @RestController
-
+@RequestMapping("/naver") // NaverRegist 와 주소 충돌을 방지하기 위해 임의로 작성
 public class OAuthController {
 	
 	@Value("${naver.client-id}")

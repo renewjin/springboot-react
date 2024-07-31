@@ -76,7 +76,7 @@
 			SELECT SEQ_TODO_NO.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO TODO
-		VALUES (${todoNo}, #{title}, default, ${todoMemberNo})
+		VALUES(${todoNo}, #{title}, default, ${todoMemberNo})
 	</insert>
 	
 </mapper>

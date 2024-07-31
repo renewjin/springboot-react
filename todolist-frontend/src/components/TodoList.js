@@ -39,7 +39,8 @@ const TodoList = () => {
            const newTodo = {
             todoNo:todoNo,
             title:inputTodo,
-            isDone:'O',
+            //isDone:'O',
+            isDone:'Y',
             todoMemberNo:loginMember.todoMemberNo
            };
 
@@ -73,7 +74,8 @@ const TodoList = () => {
             // JSON으로 된 파일을 글자로 변경해서 글자 취급으로 사용
             body: JSON.stringify({
                 todoNo: todo.todoNo,
-                isDone : todo.isDone === 'O' ? 'X' : 'O' 
+                //isDone : todo.isDone === 'O' ? 'X' : 'O' 
+                isDone : todo.isDone === 'Y' ? 'N' : 'Y' 
                 /* 
                 만약에  
                 삼항연산자   조건이    ? true일 때 실행할 구문 : 조건이 false일 때 실행할 구문 
@@ -99,7 +101,8 @@ const TodoList = () => {
             const newTodoList = [...todoList];
 
             // index번호의 태그 값을 O나 X로 변경
-            newTodoList[index].isDone = newTodoList[index].isDone ==='O'?'X':"O";
+            //newTodoList[index].isDone = newTodoList[index].isDone ==='O'?'X':"O";
+            newTodoList[index].isDone = newTodoList[index].isDone ==='Y'?'N':"Y";
 
             setTodoList(newTodoList);
         })
@@ -155,7 +158,8 @@ const TodoList = () => {
                     {todoList.map((todo, index) => (
                         <li key={keyIndex++}>
                             <div>
-                                <span className={ todo.isDone === 'X' ? 'todo-compleate' : ''}>
+                                {/* <span className={ todo.isDone === 'X' ? 'todo-compleate' : ''}> */}
+                                <span className={ todo.isDone === 'N' ? 'todo-compleate' : ''}>
                                     {todo.title}
                                 </span>
 
