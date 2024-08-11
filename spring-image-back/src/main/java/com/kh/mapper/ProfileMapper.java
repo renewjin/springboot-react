@@ -4,11 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.kh.dto.Profile;
+import com.kh.dto.UserProfile;
 
 @Mapper
 public interface ProfileMapper {
-	List<Profile> getProfile();
-	void insertProfile(Profile profile);
-
+	List<UserProfile> getProfile();
+	void insertProfile(UserProfile userProfile);
 }

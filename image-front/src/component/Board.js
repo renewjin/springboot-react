@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import '../App.css';
-
 const Board = () => {
+  const postAPI = "http://localhost:9007/posts";
+  const uploadAPI = "http://localhost:9007/gellery/upload";
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
@@ -19,7 +20,7 @@ const Board = () => {
     formData.append("content", content);
 
     // 자바 컨트롤러에 데이터 전송! Post
-    axios.post("http://localhost:9007/gellery/upload", formData, {
+    axios.post(uploadAPI, formData, {
       headers: {
         // 전송할 데이터에 글자가 아닌 파일이 함께 전송된다 머릿말로 알려주기
         "Content-Type": "multipart/form-data",
@@ -33,7 +34,7 @@ const Board = () => {
   // const 기능을 작성해놓고 필요할 때 기능을 사용하기 위해 설정
   const 게시물가져오기 = () => {
     axios
-      .get("http://localhost:9007/posts") //자바 컨트롤러 url api 주소에서 데이터 가져오기
+      .get(postAPI) //자바 컨트롤러 url api 주소에서 데이터 가져오기
       .then((response) => {
         setPosts(response.data);
         console.log(response.data);
@@ -59,8 +60,11 @@ const Board = () => {
               <td><textarea value={content} onChange={(e) => setContent(e.target.value)}  /></td>
             </tr>
             <tr>
-              <td><label htmlFor="a" className="file-label">이미지선택:
-              <input  multiple type="file"  className="img-input" id="a" onChange={(e) => setFiles(e.target.files)} />
+              <td><label htmlFor="a" className="file-label"   >이미지선택:
+              
+                <input  multiple type="file"  
+                className="img-input" id="a" 
+                onChange={(e) => setFiles(e.target.files)} />
               </label></td>
             </tr>
             <tr>

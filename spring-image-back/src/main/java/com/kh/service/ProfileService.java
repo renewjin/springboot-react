@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.dto.Profile;
+import com.kh.dto.UserProfile;
+
 
 public interface ProfileService {
-	List<Profile> getProfile();
-	void insertProfile(Profile profile);
-	void uploadProfile(MultipartFile[] files, String username, String profileImageUrl);
+	List<UserProfile> getProfile();
+	void insertProfile(UserProfile userProfile);
+	void uploadProfile(MultipartFile[] files, String username);
 }

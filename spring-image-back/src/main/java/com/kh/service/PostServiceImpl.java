@@ -2,9 +2,9 @@ package com.kh.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.Collator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +16,16 @@ import com.kh.dto.Post;
 import com.kh.mapper.PostMapper;
 
 @Service
-public class PostServiceImpl implements PostService {
-
+public class PostServiceImpl implements PostService{
+	
 	@Autowired
 	private PostMapper postMapper;
 	
-	// import org.springframework.beans.factory.annotation.Value;
-	@Value("${file.upload-dir}") // application.properties에서 설정 이름 가져와 사용
-	//file.upload-dir=C:/Users/user1/Desktop/saveImage
-	private String uploadDir;
-	//private String uploadDir = C:/Users/user1/Desktop/saveImage
+	//import org.springframework.beans.factory.annotation.Value;
+	@Value("${file.upload-dir}") //application.properties에서 설정 이름 가져와
+	private String uploadDir; 
+	//private String uploadDir = "C:/Users/user1/Desktop/saveImage";
+	//file.upload-dir=C:/Users/user1/Desktop/saveImage 경로 넣어서 사용
 	
 	@Override
 	public List<Post> findAll() {
@@ -34,8 +34,7 @@ public class PostServiceImpl implements PostService {
 	
 	@Override
 	public void insertPost(Post post) {
-		postMapper.insertPost(post);
-		
+		postMapper.insertPost(post);	
 	}
 	
 	@Override
@@ -99,10 +98,12 @@ public class PostServiceImpl implements PostService {
 		post.setContent(content);
 		post.setImageUrl(String.join(",", fileNames));
 		insertPost(post);
-		
-		
-		
-		
+	}
+	
+	@Override
+	public void updatePost(Post post) {
+		// insertPost 그대로 쓰면됨
+		// 바탕화면에 이미지가 저장된 폴더에서 기존이미지를 삭제
 		
 	}
 }
