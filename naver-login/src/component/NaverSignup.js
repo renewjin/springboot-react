@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 /*
 useLocation : URL의 정보를 포함한 객체
@@ -6,8 +6,10 @@ useLocation : URL의 정보를 포함한 객체
 */
 
 import {useLocation} from "react-router-dom"; // 버튼 클릭 없이 위치 설정
+import Login from './NaverApi';
+import AuthContext from './layout/AuthContext';
 
-function UserInfo() {
+function NaverSignup() {
     const [userInfo, setUserInfo] = useState(null);
 
     /***** 2024-08-12 비밀번호 값 설정 추가 ******/
@@ -15,6 +17,8 @@ function UserInfo() {
     /*****                                ******/
     const location = useLocation();
     const [loading, setLoading] = useState(true);
+
+    const {loginMember} = useContext(AuthContext);
     // 어떤 클릭이 없어도 UserInfo 페이지 들어오면 자동으로 실행되는 효과
     useEffect(() => {
         // URLSearchParams : URL ? 뒤에 붙는 키-벨류 값을 가져옴
@@ -119,4 +123,4 @@ function UserInfo() {
     )
 }
 
-export default UserInfo;
+export default NaverSignup;
