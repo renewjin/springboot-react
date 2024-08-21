@@ -33,14 +33,13 @@ const ChickenForm = () => {
       </label>
       <label>
         메뉴 설명 :
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)}/>
+        <textarea value={description} onChange={e => setDescription(e.target.value)}/>
       </label>
       <label>
         가격 :
         <input type="number"  value={price} onChange={(e) => setPrice(e.target.value)}/>
       </label>
       <button onClick={제출버튼}>등록하기</button>
-      <button>메인으로 돌아가기</button>
     </div>
   );
 };

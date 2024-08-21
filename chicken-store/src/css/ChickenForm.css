@@ -35,9 +35,11 @@
     padding: 10px 20px;
     cursor: pointer;
     /* hover에 적힌 배경색으로 몇초동안 변화할지 설정 */
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, font-size 0.5s, font-weight 1s;
 }
-
+/* font-weight hober bold 1초 이후에 글자 굵기 변경 */
 .chickenform-container button:hover {
     background-color: #218838;
+    font-size: 30px;
+    font-weight: bold;
 }
