@@ -22,7 +22,7 @@ function MainRouter() {
       <h1>치킨 가게 메뉴 관리</h1>
       <button className='chicken-register-button' onClick={openModal}>메뉴등록하기</button>
 
-      <ChickenList />
+      
       
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <Chickenform />
