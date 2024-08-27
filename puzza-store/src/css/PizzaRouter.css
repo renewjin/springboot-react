@@ -1,0 +1,108 @@
+/* 
+컨테이너
+가로크기 800 
+
+상하 50px 좌우 auto
+패딩 20
+배경색 f2f2f2
+테두리 동그렇게 10px
+테두리그림자효과 0 4 8 0.1
+
+
+컨테이너 안에 있는 h1
+폰트크기 36px
+글자색 #333
+글자 가운데
+
+밑이랑 간격을 20px
+*/
+
+.app-container {
+    max-width: 800px;
+
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    /*border: 1px solid black;*/
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.app-container h1 {
+    font-size: 36px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.app-container button {
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    border-radius: 10px;
+    color: white;
+}
+
+/*서치 컨테이너 모두 한줄에 나란히 오게 설정*/
+.search-container {
+    display: flex;
+    /* 한줄에서 최대한 멀리 떨어뜨리기*/
+    justify-content: space-between;
+    /*justify-content: center;*/
+    margin-bottom: 20px;
+
+}
+
+/*
+서치 컨테이너 안에 있는 input 태그
+가로크기를 전체의 70% 차지
+패딩 10
+폰트사이즈 20
+테두리 2px 실선 #ccc
+테두리 동그랗게 5px
+outline 없애기
+*/
+
+.search-container input {
+    width: 70%;
+    padding: 10px;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-container input:focus {
+    border-color: #ff4500;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    background-color: #92e700;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: #037a25;
+}
+
+/* 
+modal-container 안에 버튼 
+배경색 #ff5733
+padding 5px 10px
+들어가기 -> X 모양 으로 변경 http에서 적용된 규약으로 x설정
+소문자 대문자 x 안됨
+*/
+.modal-container button {
+    background-color: #ff5733;
+    padding: 5px 10px;
+    
+}

@@ -4,7 +4,7 @@ import PizzaForm from "./PizzaForm";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Modal from "./Modal";
-
+import '../css/PizzaRouter.css';
 
 
 const PizzaRouter = () => {

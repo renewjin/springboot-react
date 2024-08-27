@@ -1,5 +1,6 @@
 import {useState} from "react";
 import axions from "axios";
+import '../css/PizzaForm.css';
 
 const PizzaForm = () => {
     const [pizzaName, setPizzaName] = useState('');
@@ -38,7 +39,8 @@ const PizzaForm = () => {
             </label>
             <label>
                 메뉴 설명 :
-                <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                {/*<textarea value={description} onChange={(e) => setDescription(e.target.value)} />*/}
+                <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
             </label>
             <label>
                 메뉴 가격 :
